@@ -111,14 +111,14 @@ public:
         objc::release(m_webview);
         m_webview = nullptr;
       }
-      if (m_widget) {
-        if (m_widget == NSWindow_get_contentView(m_window)) {
-          NSWindow_set_contentView(m_window, nullptr);
-        }
-        objc::release(m_widget);
-        m_widget = nullptr;
-      }
       if (owns_window()) {
+		if (m_widget) {
+			if (m_widget == NSWindow_get_contentView(m_window)) {
+				NSWindow_set_contentView(m_window, nullptr);
+			}
+			objc::release(m_widget);
+			m_widget = nullptr;
+		}
         // Replace delegate to avoid callbacks and other bad things during
         // destruction.
         NSWindow_set_delegate(m_window, nullptr);
